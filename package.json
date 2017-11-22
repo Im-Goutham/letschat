@@ -1,0 +1,32 @@
+{
+  "name": "chat-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "ansi-styles": "^3.2.0",
+    "concurrently": "^3.5.1",
+    "emojione-picker": "^2.2.1",
+    "express": "^4.16.2",
+    "jquery": "^3.2.1",
+    "p-map": "^1.2.0",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-facebook-login": "^3.7.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-thunk": "^2.2.0",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "start": "concurrently \"nodemon index.js\" \"react-scripts start\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
