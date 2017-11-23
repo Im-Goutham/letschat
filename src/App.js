@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
-import login from './Pages/Login';
-import home from './Pages/Home';
+import login from './pages/Login';
+import home from './pages/Home';
 import {connect} from 'react-redux';
 import {saveUser} from './reducers/user';
 
