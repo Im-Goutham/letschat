@@ -1,17 +1,17 @@
 /*
     DEMO STYLE
 */
-@import "https://fonts.googleapis.com/css?family=Amatic+SC|Boogaloo|Cabin+Sketch";
+@import "https://fonts.googleapis.com/css?family=Indie+Flower|Maven+Pro";
 
 
 body {
-    font-family: 'Cabin Sketch', cursive !important;
+    font-family: 'Maven Pro', sans-serif !important;
     background: #fafafa;
     color:#666666;
 }
 
 p {
-    font-family: 'Cabin Sketch', cursive !important;
+    font-family: 'Maven Pro', sans-serif !important;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
@@ -61,8 +61,8 @@ i, span {
 }
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
+    min-width: 350px;
+    max-width: 350px;
     background: white;
     color: #fff;
     transition: all 0.3s;
@@ -70,7 +70,8 @@ i, span {
 
 
 .nav-content {
-   height: 500px;
+  height: calc(100vh - 90px);
+  overflow-y: scroll;
 }
 
 /* #sidebar.active {
@@ -117,8 +118,8 @@ i, span {
 ----------------------------------------------------- */
 @media (max-width: 768px) {
     #sidebar {
-        min-width: 55px;
-        max-width: 55px;
+        min-width: 80px;
+        max-width: 80px;
         text-align: center;
         margin-left: -80px !important ;
     }
@@ -181,7 +182,8 @@ i, span {
 }
 
 .messages .message.left .avatar {
-    background-color: #f5886e;
+    /*background-color: #f5886e;*/
+    padding-left: 10px;
     float: left;
 }
 
@@ -207,7 +209,8 @@ i, span {
 
 
 .messages .message.right .avatar {
-    background-color: #fdbf68;
+    /*background-color: #fdbf68;*/
+    padding-right: 10px;
     float: right;
 }
 
@@ -238,7 +241,7 @@ i, span {
 
 .chatbox {
    background-color: #E7EAEF;
-   height: calc(100vh - 163px);
+   height: calc(100vh - 140px);
    overflow-y: scroll;
 }
 
@@ -265,9 +268,27 @@ input:focus {
 
 .emoji-picker {
     position: absolute !important;
-    bottom: 100px !important;
+    bottom: 80px !important;
+}
+
+.left-message-box {
+    color: black;
+    padding: 30px 0px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.left-message-box:hover {
+    color: black;
+    background-color: #E7EAEF;
+    /*padding: 30px 0px;*/
+    border-bottom: 1px solid #e6e6e6;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 
-
-/* Scrollbar */
+.mesg-time {
+   font-size: 12px;
+}
