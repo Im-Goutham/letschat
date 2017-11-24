@@ -8,10 +8,22 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-
+      
     }
      this.responseFacebook = this.responseFacebook.bind(this);
   }
+
+  componentWillMount(){
+      let user = localStorage.getItem("user");
+      user = JSON.parse(user);
+      let {saveUser} = this.props;
+      saveUser(user);
+      if(user){
+           this.props.history.push("/home");
+      }
+  }
+
+
 
   componentWillReceiveProps(nextprops){
        let {user} = nextprops;
@@ -19,6 +31,7 @@ class Login extends Component {
   }
 
  responseFacebook = (user) => {
+   console.log("fb called..");
     console.log(user);
     let {saveUser} = this.props;
     let userData = {};
@@ -32,14 +45,18 @@ class Login extends Component {
 
   render() {
     return (
-        <div>
-          <FacebookLogin
-              appId="1710237039008375"
-              autoLoad={true}
-              fields="name,email,picture"
-              callback={this.responseFacebook}
-              icon="fa-facebook"
-              />
+        <div className="container-fluid">
+          <div className="row login_main">
+            <div className="login_box">
+              <FacebookLogin
+                  appId="1710237039008375"
+                  autoLoad={true}
+                  fields="name,email,picture"
+                  callback={this.responseFacebook}
+                  icon="fa-facebook"
+                  />
+             </div>
+          </div>
         </div>
       );
   }

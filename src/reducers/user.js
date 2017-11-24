@@ -1,6 +1,6 @@
 
 const initState = {
-  user: []
+  user: {}
 }
 
 

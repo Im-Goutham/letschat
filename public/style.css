@@ -91,7 +91,7 @@ i, span {
 }
 
 #sidebar .sidebar-header {
-    padding: 20px;
+    padding: 10px;
     background: #637EB5;
 }
 
@@ -132,6 +132,7 @@ i, span {
 
 
     .chat-icons {
+        padding: 7px 0px;
         font-size: 20px !important;
     }
 
@@ -139,6 +140,7 @@ i, span {
        width: 245px !important ;
     }
 }
+
 
 #sidebarCollapse {
     background-color: #637EB5;
@@ -271,9 +273,13 @@ input:focus {
     bottom: 80px !important;
 }
 
+.emoji-list {
+    width: 400px !important ;
+}
+
 .left-message-box {
     color: black;
-    padding: 30px 0px;
+    padding: 20px 0px;
     border-bottom: 1px solid #e6e6e6;
 }
 
@@ -284,11 +290,32 @@ input:focus {
     border-bottom: 1px solid #e6e6e6;
 }
 
+.left-message-box p{
+    font-size: 13px;
+    margin-top: 10px;
+}
+
 ::-webkit-scrollbar {
     display: none;
+}
+
+#emoji_text {
+   display: none;
 }
 
 
 .mesg-time {
    font-size: 12px;
+}
+
+.login_main {
+    width: 100%;
+    height: 100vh;
+    display: table;
+    text-align: center;
+}
+
+.login_box {
+    display: table-cell;
+    vertical-align: middle;
 }

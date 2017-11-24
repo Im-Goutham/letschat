@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import EmojiPicker from 'emoji-picker-react';
 import io from 'socket.io-client';
 const socket = io.connect('http://localhost:4000');
 
@@ -7,10 +8,12 @@ class ChatBox extends Component {
     super();
     this.state = {
       user: props.user,
-      messages: []
+      messages: [],
+      showEmoji: false
     }
     this.sendMessage = this.sendMessage.bind(this);
     this.userTyping = this.userTyping.bind(this);
+    this.showEmoji = this.showEmoji.bind(this);
   }
 
   componentDidMount() {
@@ -52,51 +55,112 @@ class ChatBox extends Component {
         socket.emit('typing', this.state.user.name);
   }
 
+
+
+  showEmoji(){
+      this.setState({showEmoji: !this.state.showEmoji})
+  }
+
+  getEmoji(emoji){
+      console.log("emoji is "+emoji);
+      let chat_input = document.getElementById('chat_input'); // or $('#myinput')[0]
+      var caretPos = chat_input.selectionStart;
+      let input_value = chat_input.value;
+      var res = input_value.slice(0, caretPos);
+      var res1 = input_value.slice(caretPos, input_value.length);
+      document.getElementById('emoji_text').innerHTML = '&#x'+emoji+';';
+      document.getElementById('chat_input').value = res+" "+document.getElementById('emoji_text').innerHTML+" "+res1;
+  }
+
   render() {
-    let {user,messages} = this.state;
+    let {user,showEmoji,all_messages} = this.state;
+
     console.log("user in chatbox..."+JSON.stringify(user));
     return (
-        <div className="content">
-          <div className="contact-profile">
-            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt />
-            <p>Harvey Specter</p>
-            <div className="social-media">
-              <i className="fa fa-facebook" aria-hidden="true" />
-              <i className="fa fa-twitter" aria-hidden="true" />
-              <i className="fa fa-instagram" aria-hidden="true" />
+      <div id="content" style={{width:'100%'}}>
+        <div className="row header">
+          <div className="col-md-8  col-xs-6 profile_name">
+            Sandy
+          </div>
+          <div className="col-md-4  col-xs-6 text-right">
+            <div className="col-md-4 col-xs-4">
+              <i className="fa fa-phone" aria-hidden="true"/>
             </div>
-          </div>
-          <div className="messages">
-            <ul>
-              {
-                  (messages.length > 0)?(
-                     messages.map((mesg,key)=>{
-                       let className = "sent";
-                       if(mesg.type == "reply"){
-                            className = "replies";
-                       }
-                         return  <li className={className}>
-                             <img src={user.picture} alt={mesg.handle} />
-                             <p>{mesg.message}</p>
-                            </li>
-                     })
-                  ):(  <li className="sent">
-                      <img src={user.picture} alt />
-                      <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
-                    </li>)
-              }
-            </ul>
-          </div>
-          <div className="message-input">
-            <div className="wrap">
-              <div id="feedback"></div>
-              <input type="text" ref="message" placeholder="Write your message..." onKeyPress={this.userTyping}/>
-              <i className="fa fa-smile-o fa-lg smiley" aria-hidden="true" />
-              <i className="fa fa-paperclip attachment" aria-hidden="true" />
-              <button className="submit" onClick={this.sendMessage}><i className="fa fa-paper-plane" aria-hidden="true" /></button>
+            <div className="col-md-4 col-xs-4">
+              <i className="fa fa-video-camera" aria-hidden="true"/>
+            </div>
+            <div className="col-md-4 col-xs-4">
+              <i className="fa fa-ellipsis-v" aria-hidden="true"/>
             </div>
           </div>
         </div>
+        <div className="row chatbox">
+            <ul className="messages">
+              <li className="message left appeared"><div className="avatar hidden-xs"> <img src="https://www.gannett-cdn.com/-mm-/1bc09ac8001ac5cd3ffef4723dba6007dbc8aeda/c=72-0-1947-2500&r=537&c=0-0-534-712/local/-/media/2016/08/10/GreatFalls/B9323321437Z.1_20160810182558_000_GFFFANB82.1-0.jpg" className="img-circle" alt="Cinque Terre" width={50} height={50} /></div>
+                <div className="text_wrapper">
+                  <div className="text">Hello Philip! :)</div>
+                </div>
+              </li>
+              <li className="message right appeared"><div className="avatar hidden-xs"> <img src="https://www.gannett-cdn.com/-mm-/1bc09ac8001ac5cd3ffef4723dba6007dbc8aeda/c=72-0-1947-2500&r=537&c=0-0-534-712/local/-/media/2016/08/10/GreatFalls/B9323321437Z.1_20160810182558_000_GFFFANB82.1-0.jpg" className="img-circle" alt="Cinque Terre" width={50} height={50} /></div>
+                <div className="text_wrapper">
+                  <div className="text">Hi Sandy! How are you?</div>
+                </div>
+              </li>
+              <li className="message left appeared"><div className="avatar hidden-xs"> <img src="https://www.gannett-cdn.com/-mm-/1bc09ac8001ac5cd3ffef4723dba6007dbc8aeda/c=72-0-1947-2500&r=537&c=0-0-534-712/local/-/media/2016/08/10/GreatFalls/B9323321437Z.1_20160810182558_000_GFFFANB82.1-0.jpg" className="img-circle" alt="Cinque Terre" width={50} height={50} /></div>
+                <div className="text_wrapper">
+                  <div className="text">I'm fine, thank you!</div>
+                </div>
+              </li>
+              <li className="message left appeared"><div className="avatar hidden-xs"> <img src="https://www.gannett-cdn.com/-mm-/1bc09ac8001ac5cd3ffef4723dba6007dbc8aeda/c=72-0-1947-2500&r=537&c=0-0-534-712/local/-/media/2016/08/10/GreatFalls/B9323321437Z.1_20160810182558_000_GFFFANB82.1-0.jpg" className="img-circle" alt="Cinque Terre" width={50} height={50} /></div>
+                <div className="text_wrapper">
+                  <div className="text">Hello Philip! :)</div>
+                </div>
+              </li>
+              <li className="message right appeared"><div className="avatar hidden-xs"> <img src="https://www.gannett-cdn.com/-mm-/1bc09ac8001ac5cd3ffef4723dba6007dbc8aeda/c=72-0-1947-2500&r=537&c=0-0-534-712/local/-/media/2016/08/10/GreatFalls/B9323321437Z.1_20160810182558_000_GFFFANB82.1-0.jpg" className="img-circle" alt="Cinque Terre" width={50} height={50} /></div>
+                <div className="text_wrapper">
+                  <div className="text">Hi Sandy! How are you?</div>
+                </div>
+              </li>
+              <li className="message left appeared"><div className="avatar hidden-xs"> <img src="https://www.gannett-cdn.com/-mm-/1bc09ac8001ac5cd3ffef4723dba6007dbc8aeda/c=72-0-1947-2500&r=537&c=0-0-534-712/local/-/media/2016/08/10/GreatFalls/B9323321437Z.1_20160810182558_000_GFFFANB82.1-0.jpg" className="img-circle" alt="Cinque Terre" width={50} height={50} /></div>
+                <div className="text_wrapper">
+                  <div className="text">I'm fine, thank you!</div>
+                </div>
+              </li>
+              <li className="message left appeared"><div className="avatar hidden-xs"> <img src="https://www.gannett-cdn.com/-mm-/1bc09ac8001ac5cd3ffef4723dba6007dbc8aeda/c=72-0-1947-2500&r=537&c=0-0-534-712/local/-/media/2016/08/10/GreatFalls/B9323321437Z.1_20160810182558_000_GFFFANB82.1-0.jpg" className="img-circle" alt="Cinque Terre" width={50} height={50} /></div>
+                <div className="text_wrapper">
+                  <div className="text">Hello Philip! :)</div>
+                </div>
+              </li>
+              <li className="message right appeared"><div className="avatar hidden-xs"> <img src="https://www.gannett-cdn.com/-mm-/1bc09ac8001ac5cd3ffef4723dba6007dbc8aeda/c=72-0-1947-2500&r=537&c=0-0-534-712/local/-/media/2016/08/10/GreatFalls/B9323321437Z.1_20160810182558_000_GFFFANB82.1-0.jpg" className="img-circle" alt="Cinque Terre" width={50} height={50} /></div>
+                <div className="text_wrapper">
+                  <div className="text">Hi Sandy! How are you?</div>
+                </div>
+              </li>
+              <li className="message left appeared"><div className="avatar hidden-xs"> <img src="https://www.gannett-cdn.com/-mm-/1bc09ac8001ac5cd3ffef4723dba6007dbc8aeda/c=72-0-1947-2500&r=537&c=0-0-534-712/local/-/media/2016/08/10/GreatFalls/B9323321437Z.1_20160810182558_000_GFFFANB82.1-0.jpg" className="img-circle" alt="Cinque Terre" width={50} height={50} /></div>
+                <div className="text_wrapper">
+                  <div className="text">I'm fine, thank you!</div>
+                </div>
+              </li>
+            </ul>
+            {
+                (showEmoji)?(
+                    <EmojiPicker width="400px" height="280" onEmojiClick={this.getEmoji.bind(this)}/>
+                ):(null)
+            }
+        </div>
+        <div className="row footer">
+          <div className="col-md-1 col-xs-1 text-center">
+              <span className="chat-icons" onClick={this.showEmoji}><i className="fa fa-smile-o" aria-hidden="true" /></span>
+          </div>
+          <div className="col-md-10 col-xs-9" style={{paddingRight:0}}>
+              <p id="emoji_text">&#x1f922;</p>
+              <input placeholder="Send a message" type="text" className="form-control chat_textfield" id="chat_input" />
+          </div>
+          <div className="col-md-1 col-xs-1 text-center">
+              <span className="chat-icons"><i className="fa fa-camera" aria-hidden="true" /></span>
+          </div>
+        </div>
+      </div>
       );
   }
 }
