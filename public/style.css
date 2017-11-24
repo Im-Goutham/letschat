@@ -285,7 +285,7 @@ input:focus {
 
 .left-message-box:hover {
     color: black;
-    background-color: #E7EAEF;
+    background-color: #f0f2f5;
     /*padding: 30px 0px;*/
     border-bottom: 1px solid #e6e6e6;
 }

@@ -105,10 +105,10 @@ class SidePanel extends Component {
       <nav id="sidebar" className="active">
         <div className="sidebar-header col-md-12">
         <div className="col-md-2 text-center">
-          <img src="http://i.dailymail.co.uk/i/pix/2017/04/20/13/3F6B966D00000578-4428630-image-m-80_1492690622006.jpg" className="img-circle" alt="Cinque Terre" width={35} height={35} />
+          <img src={user.picture} className="img-circle" alt="Cinque Terre" width={35} height={35} />
         </div>
         <div className="col-md-8 hidden-xs text-center" style={{padding: '10px 0px'}}>
-            <h3>Goutham</h3>
+            <h3>{user.name}</h3>
         </div>
         <div className="col-md-2 hidden-xs text-right" style={{padding: '10px 0px'}}>
             <span className="dropdown"><i className="fa fa-cog" aria-hidden="true"  data-toggle="dropdown"/>

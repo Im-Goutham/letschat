@@ -22,14 +22,14 @@ class Home extends Component {
 
 
   render() {
-    let {user,showEmoji,all_messages} = this.state;
+    let {user} = this.state;
     console.log("user data is " + JSON.stringify(user));
     return (<div className="wrapper">
       {/* Sidebar Holder */}
-        <SidePanel/>
+        <SidePanel user={user}/>
       {/* Page Content Holder */}
 
-       <ChatBox />
+       <ChatBox user={user}/>
     </div>);
   }
 }
