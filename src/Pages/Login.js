@@ -210,7 +210,15 @@ class Login extends Component {
                     username: username,
                     photo: photo
                   });
-             this.props.history.push("/home");
+              //     var user = firebase.auth().currentUser;
+              //   alert('user is  '+JSON.stringify(user));
+              //     user.sendEmailVerification().then(function(result) {
+              // // Email sent.
+              //  alert(""+result)
+              //     }).catch(function(error) {
+              //       // An error happened.
+              //     });
+             //this.props.history.push("/home");
         }
 
      emailSignIn(e){
