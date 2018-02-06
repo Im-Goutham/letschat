@@ -9,6 +9,7 @@
     "emoji-picker-react": "^1.5.3",
     "emojione-picker": "^2.2.1",
     "express": "^4.16.2",
+    "firebase": "^4.9.1",
     "jquery": "^3.2.1",
     "p-map": "^1.2.0",
     "react": "^16.1.1",
@@ -27,7 +28,7 @@
     "react-scripts": "1.0.17"
   },
   "scripts": {
-    "start": "concurrently \"nodemon index.js\" \"react-scripts start\"",
+    "start": "concurrently \"nodemon index.js\" \"PORT=3006 react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

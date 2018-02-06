@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import {saveUser} from '../reducers/user';
-
+import * as firebase  from 'firebase';
 
 class SidePanel extends Component {
   constructor(props) {
@@ -83,17 +83,32 @@ class SidePanel extends Component {
 
 
 
+  componentDidMount(){
+    firebase.auth().onAuthStateChanged(function(user) {
+    //  alert("user is "+JSON.stringify(user))
+      //window.user = user; // user is undefined if no user signed in
+      });
+  }
+
 
 
     signOut(){
         console.log("Came here....");
-        window.FB.logout(function(response) {
-        // user is now logged out
-      });
-      let {saveUser} = this.props;
-      saveUser(null);
-      localStorage.setItem("user", null);
-      this.props.history.push("/");
+      //   window.FB.logout(function(response) {
+      //   // user is now logged out
+      // });
+      let {saveUser,user} = this.props;
+       alert("user is "+JSON.stringify(user))
+       let {loginType} = user;
+           firebase.auth().signOut().then(function() {
+                console.log("Logged out!")
+            }, function(error) {
+                console.log("email signout "+error.code);
+                console.log("email signout "+error.message);
+            });
+       saveUser(null);
+       localStorage.setItem("user", null);
+       this.props.history.push("/");
     }
 
 
@@ -105,10 +120,10 @@ class SidePanel extends Component {
       <nav id="sidebar" className="active">
         <div className="sidebar-header col-md-12">
         <div className="col-md-2 text-center">
-          <img src={user.picture} className="img-circle" alt="Cinque Terre" width={35} height={35} />
+          <img src={(user.photo)?(user.photo):('images/photo.jpg')} className="img-circle" alt="Cinque Terre" width={35} height={35} />
         </div>
         <div className="col-md-8 hidden-xs text-center" style={{padding: '10px 0px'}}>
-            <h3>{user.name}</h3>
+            <h3>{user.username}</h3>
         </div>
         <div className="col-md-2 hidden-xs text-right" style={{padding: '10px 0px'}}>
             <span className="dropdown"><i className="fa fa-cog" aria-hidden="true"  data-toggle="dropdown"/>
